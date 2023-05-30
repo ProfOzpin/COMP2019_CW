@@ -1,4 +1,4 @@
-# COMP2019_CW_GroupB
+# COMP2019_CW
 User Manual for Software Engineering Group Project Group B.
 
 ## Introduction
