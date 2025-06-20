@@ -1,55 +1,62 @@
-import styles from "../style";
-import { robot } from "../assets";
-import GetStarted from "./GetStarted";
+import Link from "next/link";
+const robot = "/assets/robot.png";
+const arrowUp = "/assets/arrow-up.svg";
 
 const Hero = () => {
   return (
-    <section id="home" className={`flex md:flex-row flex-col ${styles.paddingY}`}>
+    <div className="app-container">
+      <div className="main-content-card" style={{ position: "relative", overflow: "hidden" }}>
+        {/* Decorative gradients */}
+        <div className="pink__gradient"></div>
+        <div className="white__gradient"></div>
+        <div className="blue__gradient"></div>
 
-      <div className={`flex-1 ${styles.flexStart} flex-col xl:px-0 sm:px-16 px-6`}>
-
-        <div className="flex flex-row items-center py-[6px] px-4 bg-discount-gradient rounded-[10px] mb-2">
-          <p className={`${styles.paragraph} ml-2`}>
-            <span className="text-white">Group B</span> SEGP
-          </p>
+        {/* Tagline */}
+        <div style={{
+          display: "inline-block",
+          background: "linear-gradient(125.17deg, #272727 0%, #11101d 100%)",
+          borderRadius: "10px",
+          padding: "6px 18px",
+          marginBottom: "1.2rem",
+          fontWeight: 500,
+          fontSize: "1rem"
+        }}>
+          <span style={{ color: "#fff" }}>Group B</span> SEGP
         </div>
 
         {/* Title */}
-        <div className="flex flex-row justify-between items-center w-full">
-          <h1 className="flex-1 font-poppins font-semibold ss:text-[72px] text-[52px] text-white ss:leading-[100.8px] leading-[75px]">
-            Imag.e <br className="sm:block hidden" />{" "}
-            <span className="text-gradient"></span>
-          </h1>
-        </div>
+        <h1 style={{ fontSize: "2.5rem", fontWeight: 700, marginBottom: "0.2em" }}>Imag.e</h1>
+        <h2 style={{
+          fontSize: "2rem",
+          fontWeight: 700,
+          marginBottom: "1.5em",
+          background: "radial-gradient(64.18% 64.18% at 71.16% 35.69%, #def9fa 0.89%, #bef3f5 17.23%, #9dedf0 42.04%, #7de7eb 55.12%, #5ce1e6 71.54%, #33bbcf 100%)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
+          textFillColor: "transparent"
+        }}>
+          Face Recognition
+        </h2>
 
-        <h1 className="font-poppins font-semibold ss:text-[68px] text-[52px] text-white ss:leading-[100.8px] leading-[75px] w-full">
-            <span className="text-gradient">Face Recognition</span>
-        </h1>
+        {/* Get Started Button */}
+        <Link href="/upload">
+          <span className="get-started-button">
+            Get Started
+            <img src={arrowUp} alt="arrow up" />
+          </span>
+        </Link>
 
-        <div className="ss:flex hidden md:mr-4 mr-0 mt-2">
-            <GetStarted />
-        </div>
-
-        <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
-          Welcome to Group B face recognition web application. Generate information of a person by inputting their image into our system.
+        {/* Description */}
+        <p>
+          Welcome to Group B face recognition web application.<br />
+          Generate information of a person by inputting their image into our system.
         </p>
-      </div>
 
-      <div className={`flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative`}>
-        {/* Image in landing page */}
-        <img src={robot} alt="image" className="w-[60%] h-[90%] relative z-[5]" />
-        {/* gradient design*/}
-        <div className="absolute z-[0] w-[40%] h-[35%] top-0 pink__gradient" />
-        {<div className="absolute z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40" />}
-        {<div className="absolute z-[0] w-[50%] h-[50%] right-20 bottom-20 blue__gradient" />}
+        {/* Robot Image */}
+        <img src={robot} alt="robot" style={{ marginTop: "2em", width: "60%", maxWidth: "260px" }} />
       </div>
-
-      {/* Only shows in mobile devices */}
-      <div className={`ss:hidden ${styles.flexCenter}`}>
-        <GetStarted />
-      </div>
-      
-    </section>
+    </div>
   );
 };
 

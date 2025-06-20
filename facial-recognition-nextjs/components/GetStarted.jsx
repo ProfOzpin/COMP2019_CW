@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "../style";
 
-const arrowUp = "/assets/arrowUp.svg";
+const arrowUp = "/assets/arrow-up.svg";
 
 const GetStarted = () => (
   <Link href="/upload">

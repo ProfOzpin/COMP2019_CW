@@ -1,8 +1,6 @@
 "use client"
 
 import React, { useState } from "react";
-import styles from "../style";
-
 const card = "/assets/card.png";
 
 function Upload() {
@@ -90,16 +88,16 @@ function Upload() {
     };
 
     return (
-        <section className={`flex ${styles.flexStart} items-center md:items-start md:flex-row flex-col ${styles.paddingY}`}>
-            <div className={`flex-1 ${styles.flexStart} flex-col xl:px-0 sm:px-16 px-6`}>
+        <section className="upload-section">
+            <div className="upload-image-col">
                 {uploadedImageUrl ? (
-                    <div className="relative">
+                    <div className="uploaded-image-container">
                         <img 
                             src={uploadedImageUrl} 
                             alt="Uploaded to Cloudflare R2" 
-                            className="w-[100%] h-[100%] relative z-[5] rounded-lg shadow-lg" 
+                            className="uploaded-image" 
                         />
-                        <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded text-sm">
+                        <div className="r2-badge">
                             ☁️ Hosted on R2
                         </div>
                     </div>
@@ -107,51 +105,51 @@ function Upload() {
                     <img 
                         src={previewUrl} 
                         alt="Preview" 
-                        className="w-[100%] h-[100%] relative z-[5] rounded-lg" 
+                        className="uploaded-image"
                     />
                 ) : (
                     showPlaceholder && (
                         <img 
                             src={card} 
                             alt="Upload placeholder" 
-                            className="w-[100%] h-[100%] relative z-[5]" 
+                            className="uploaded-image"
                         />
                     )
                 )}
             </div>
 
-            <div className={`flex-1 flex ${styles.flexStart} flex-col md:ml-10 ml-0 md:mt-0 mt-10`}>
-                <h2 className="font-poppins font-semibold xs:text-[48px] text-[40px] text-white xs:leading-[76.8px] leading-[66.8px] w-full">
+            <div className="upload-form-col">
+                <h2 className="upload-title">
                     Upload to R2 CDN
                 </h2>
                 
-                <div className="mt-5 mb-5">
+                <div className="upload-input-row">
                     <input
                         type="file"
                         accept="image/*"
                         onChange={handleFileChange}
-                        className="font-poppins font-normal text-dimWhite text-[18px] leading-[30.8px] max-w-[470px] file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-gradient file:text-primary"
+                        className="upload-input"
                     />
                 </div>
 
                 {selectedFile && (
-                    <div className="mb-5">
-                        <p className="font-poppins font-normal text-dimWhite text-[16px] mb-2">
+                    <div className="upload-selected-file">
+                        <p className="upload-selected-file-label">
                             Selected: {selectedFile.name} ({(selectedFile.size / 1024 / 1024).toFixed(2)} MB)
                         </p>
                         
-                        <div className="flex gap-4">
+                        <div className="upload-btn-row">
                             <button
                                 onClick={handleUpload}
                                 disabled={loading}
-                                className="py-3 px-6 font-poppins font-medium text-[18px] text-primary bg-blue-gradient rounded-[10px] outline-none disabled:opacity-50"
+                                className="upload-btn"
                             >
                                 {loading ? "Uploading..." : "Upload to R2 & Analyze"}
                             </button>
                             
                             <button
                                 onClick={handleReset}
-                                className="py-3 px-6 font-poppins font-medium text-[18px] text-white border border-white rounded-[10px] outline-none hover:bg-white hover:text-primary transition-colors"
+                                className="reset-btn"
                             >
                                 Reset
                             </button>
@@ -160,37 +158,37 @@ function Upload() {
                 )}
 
                 {loading && uploadProgress > 0 && (
-                    <div className="mb-5 max-w-[470px]">
-                        <div className="w-full bg-gray-200 rounded-full h-2.5">
+                    <div className="upload-progress-container">
+                        <div className="upload-progress-bar-bg">
                             <div 
-                                className="bg-blue-600 h-2.5 rounded-full transition-all duration-300" 
+                                className="upload-progress-bar-fg"
                                 style={{ width: `${uploadProgress}%` }}
                             ></div>
                         </div>
-                        <p className="font-poppins font-normal text-dimWhite text-[14px] mt-2">
+                        <p className="upload-progress-label">
                             {uploadProgress}% uploaded
                         </p>
                     </div>
                 )}
 
-                <h2 className="font-poppins font-semibold xs:text-[48px] text-[40px] text-white xs:leading-[76.8px] leading-[66.8px] w-full mt-10">
+                <h2 className="upload-title results-title">
                     Results
                 </h2>
                 
                 {!results && !loading && (
-                    <p className="font-poppins font-normal text-dimWhite text-[18px] leading-[30.8px] max-w-[470px] mt-5">
+                    <p className="upload-results-placeholder">
                         Upload an image to Cloudflare R2 CDN and get facial recognition results!
                     </p>
                 )}
                 
                 {loading && (
-                    <p className="font-poppins font-normal text-dimWhite text-[18px] leading-[30.8px] max-w-[470px] mt-5">
+                    <p className="upload-results-placeholder">
                         Uploading to Cloudflare R2 and processing with AI...
                     </p>
                 )}
                 
                 {results && (
-                    <pre className="font-poppins font-normal text-dimWhite text-[14px] leading-[24px] max-w-[470px] mt-5 whitespace-pre-wrap bg-gray-800 p-4 rounded-lg overflow-auto max-h-96">
+                    <pre className="upload-results-output">
                         {results}
                     </pre>
                 )}

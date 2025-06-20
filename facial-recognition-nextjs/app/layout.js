@@ -1,6 +1,6 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import '../index.css'
+import './globals.css'
 
 export const metadata = {
   title: 'Imag.e - Face Recognition',
@@ -13,25 +13,26 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-primary w-full overflow-hidden">
-        <div className="bg-primary w-full overflow-hidden">
-          <div className="sm:px-16 px-6 flex justify-center items-center">
+      <body className="bg-primary min-h-screen w-full font-poppins flex flex-col">
+        <div className="flex flex-col min-h-screen w-full bg-primary overflow-x-hidden">
+          {/* Header/Navbar */}
+          <header className="sm:px-16 px-6 flex justify-center items-center">
             <div className="xl:max-w-[1280px] w-full">
               <Navbar />
             </div>
-          </div>
-          
-          <div className="flex justify-center items-start bg-primary">
+          </header>
+          {/* Main content */}
+          <main className="flex-1 flex justify-center items-start">
             <div className="xl:max-w-[1280px] w-full">
               {children}
             </div>
-          </div>
-          
-          <div className="sm:px-16 px-6 flex justify-center items-center bg-primary">
+          </main>
+          {/* Footer */}
+          <footer className="sm:px-16 px-6 flex justify-center items-center">
             <div className="xl:max-w-[1280px] w-full">
               <Footer />
             </div>
-          </div>
+          </footer>
         </div>
       </body>
     </html>
