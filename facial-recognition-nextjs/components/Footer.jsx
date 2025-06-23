@@ -5,8 +5,6 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-brand">
-          <span className="footer-title">hoobank</span>
-          <p className="footer-desc">A new way to make the payments easy, reliable and secure.</p>
         </div>
         <div className="footer-links">
           <div>
@@ -35,7 +33,6 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <span>Copyright © 2022 HooBank. All Rights Reserved.</span>
       </div>
     </footer>
   );

@@ -1,73 +1,69 @@
-import { NextResponse } from 'next/server'
-import { PutObjectCommand } from '@aws-sdk/client-s3'
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
-import { r2 } from '../../../lib/r2'
+import { NextResponse } from 'next/server';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+
+const r2Client = new S3Client({
+  region: 'auto',
+  endpoint: process.env.CLOUDFLARE_R2_ENDPOINT,
+  credentials: {
+    accessKeyId: process.env.CLOUDFLARE_R2_ACCESS_KEY_ID,
+    secretAccessKey: process.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY,
+  },
+});
 
 export async function POST(request) {
-    try {
-        const formData = await request.formData()
-        const file = formData.get('file')
-        
-        if (!file) {
-            return NextResponse.json({ error: 'No file provided' }, { status: 400 })
-        }
-
-        // Generate unique filename
-        const filename = `${Date.now()}-${file.name}`
-        
-        // Generate signed URL for upload
-        const signedUrl = await getSignedUrl(
-            r2,
-            new PutObjectCommand({
-                Bucket: process.env.R2_BUCKET_NAME,
-                Key: filename,
-                ContentType: file.type,
-            }),
-            { expiresIn: 3600 } // URL expires in 1 hour
-        )
-
-        // Convert file to buffer and upload directly
-        const bytes = await file.arrayBuffer()
-        const buffer = Buffer.from(bytes)
-
-        // Upload to R2
-        const uploadCommand = new PutObjectCommand({
-            Bucket: process.env.R2_BUCKET_NAME,
-            Key: filename,
-            Body: buffer,
-            ContentType: file.type,
-        })
-
-        await r2.send(uploadCommand)
-
-        // Construct public URL
-        const publicUrl = `${process.env.CLOUDFLARE_R2_PUBLIC_URL}/${filename}`
-
-        // Send to Colab for facial recognition
-        const colabResponse = await fetch(process.env.COLAB_API_URL + '/recognize', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                image_url: publicUrl
-            })
-        })
-
-        let recognitionResults = null
-        if (colabResponse.ok) {
-            recognitionResults = await colabResponse.json()
-        }
-
-        return NextResponse.json({
-            success: true,
-            filename: filename,
-            url: publicUrl,
-            recognition_results: recognitionResults
-        })
-
-    } catch (error) {
-        console.error('Upload error:', error)
-        return NextResponse.json({ error: 'Upload failed' }, { status: 500 })
+  try {
+    console.log('R2 upload started...');
+    
+    const formData = await request.formData();
+    const file = formData.get('file');
+    
+    if (!file) {
+      console.error('No file provided');
+      return NextResponse.json({ 
+        success: false, 
+        error: 'No file provided' 
+      }, { status: 400 });
     }
+
+    console.log('File received:', file.name, 'Size:', file.size, 'Type:', file.type);
+
+    // Generate unique filename
+    const timestamp = Date.now();
+    const filename = `${timestamp}-${file.name}`;
+    
+    // Convert file to buffer
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+
+    console.log('Uploading to R2 bucket:', process.env.CLOUDFLARE_R2_BUCKET_NAME);
+
+    // Upload to R2
+    const uploadCommand = new PutObjectCommand({
+      Bucket: process.env.CLOUDFLARE_R2_BUCKET_NAME,
+      Key: filename,
+      Body: buffer,
+      ContentType: file.type,
+    });
+
+    await r2Client.send(uploadCommand);
+
+    const baseUrl = process.env.CLOUDFLARE_R2_PUBLIC_URL.replace(/\/$/, ''); // Remove trailing slash
+    const publicUrl = `${baseUrl}/${filename}`; // Single slash
+
+    console.log('R2 upload successful, URL:', publicUrl);
+
+    return NextResponse.json({
+      success: true,
+      filename: file.name,
+      url: publicUrl,
+      size: file.size
+    });
+
+  } catch (error) {
+    console.error('R2 upload error:', error);
+    return NextResponse.json({ 
+      success: false, 
+      error: error.message || 'Upload failed' 
+    }, { status: 500 });
+  }
 }

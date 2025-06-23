@@ -483,3 +483,73 @@ img, .main-content-card img {
   }
 }
 
+.feedback-section {
+  margin-top: 1.5rem;
+  padding: 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.8rem;
+  text-align: center;
+}
+
+.feedback-buttons {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  margin-top: 0.8rem;
+}
+
+.feedback-btn {
+  padding: 0.6rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.feedback-btn:hover {
+  transform: scale(1.05);
+}
+
+.feedback-btn.correct {
+  background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+  color: #000;
+}
+
+.feedback-btn.incorrect {
+  background: linear-gradient(90deg, #ef4444 0%, #f87171 100%);
+  color: #fff;
+}
+
+.loading-overlay {
+  position: fixed;
+  z-index: 9999;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(17,16,29,0.87);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 7px solid #5ce1e6;
+  border-top: 7px solid #222;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1.2rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+
+.loading-text {
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
