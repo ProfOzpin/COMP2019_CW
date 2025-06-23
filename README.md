@@ -1,5 +1,12 @@
 # 🎭 Facial Recognition Analytics Platform
 
+## Screenshots
+
+![Home](https://github.com/user-attachments/assets/66180690-e9b8-45cf-b3d6-862c42dccffd)
+![Dashboard](https://github.com/user-attachments/assets/d8152e66-e3fb-49de-b0b4-3612678995dd)
+![Test](https://github.com/user-attachments/assets/4ab89f84-df9b-42f1-832f-fa9133ec3350)
+![Results](https://github.com/user-attachments/assets/30d0b9f8-aeb0-461b-b446-33cfdcb13ede)
+
 ## ✨ Features
 
 ### 🖼️ **Intelligent Image Processing**
@@ -178,20 +185,13 @@ Our comprehensive dashboard provides:
 
 ---
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
 ## 🤝 Contributing
 
 We welcome contributions! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
 ---
 
-
-
 **Built with ❤️ using Next.js, React, Python, and AI**
 
 *Deployed on AWS Amplify -  Powered by Google Colab -  Stored on Cloudflare R2*
+
