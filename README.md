@@ -1,9 +1,5 @@
 # 🎭 Facial Recognition Analytics Platform
 
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=.shields.io/badge/React-20232A?style=img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonCloudflare-F38020?style=for-the-badge&logo=clou Amplify](https://img.shields.io/badge/Deployed%20on-AWS%20Amplify-FF9900?style=forshields.io/badge/AI-Powered-FF6B6B?style=for](https://img.shields.io/badge with real-time analytics and beautiful data visualizations*
-
----
-
 ## ✨ Features
 
 ### 🖼️ **Intelligent Image Processing**
