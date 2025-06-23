@@ -5,21 +5,21 @@ const logo = "/assets/logo.png";
 
 export default function Navbar() {
   return (
-    <nav className="w-full flex py-6 justify-between items-center navbar">
-      <img src={logo} alt="Imag.e" className="w-[124px] h-[32px]" />
+    <nav className="navbar">
+      <img src={logo} alt="Imag.e" className="navbar-logo-img" />
 
-      <ul className="list-none sm:flex hidden justify-end items-center flex-1">
-        <li className="font-poppins font-normal cursor-pointer text-[16px] text-white mr-10">
-          <Link href="/">Home</Link>
+      <ul className="navbar-links">
+        <li className="navbar-link-item">
+          <Link href="/" className="navbar-link">Home</Link>
         </li>
-        <li className="font-poppins font-normal cursor-pointer text-[16px] text-white mr-10">
-          <Link href="/upload">Upload</Link>
+        <li className="navbar-link-item">
+          <Link href="/upload" className="navbar-link">Upload</Link>
         </li>
-        <li className="font-poppins font-normal cursor-pointer text-[16px] text-white mr-10">
-          <Link href="/dashboard">Dashboard</Link>
+        <li className="navbar-link-item">
+          <Link href="/dashboard" className="navbar-link">Dashboard</Link>
         </li>
-        <li className="font-poppins font-normal cursor-pointer text-[16px] text-white mr-0">
-          <Link href="/help">Help</Link>
+        <li className="navbar-link-item">
+          <Link href="/help" className="navbar-link">Help</Link>
         </li>
       </ul>
     </nav>
